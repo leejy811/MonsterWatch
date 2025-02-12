@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
     public bool isDashable;
     public bool isDashReset;   
     public bool isInputEnabled;
-    public bool isMovable;
 
     #region Components
     public Rigidbody2D rb;
