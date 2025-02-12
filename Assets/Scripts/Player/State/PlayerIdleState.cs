@@ -25,7 +25,7 @@ public class PlayerIdleState : PlayerState
         if (xInput != 0)
             stateMachine.ChangeState(player.moveState);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
             stateMachine.ChangeState(player.jumpState);
 
     }

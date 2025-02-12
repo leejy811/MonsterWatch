@@ -27,11 +27,13 @@ public class PlayerMoveState : PlayerState
 
         player.SetVelocity(player.moveSpeed * dir);
 
+
+
         //StateChange
         if (xInput == 0)
             stateMachine.ChangeState(player.idleState);
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
             stateMachine.ChangeState(player.jumpState);
 
     }

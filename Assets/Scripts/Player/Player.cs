@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     public float jumpDuration = 0.5f;
     public bool isJumping = false;
     public int jumpCnt = 0;
-    public float jumpSpeed = 5.0f;
+    public float jumpUpSpeed = 5.0f;
+    public float jumpDownSpeed = 3.0f;
     public bool isGrounded = true;
     #region Components
     public Rigidbody2D rb;
@@ -79,7 +80,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         stateMachine.currentState.Update();
-
     }
 
     private void FixedUpdate()
@@ -91,6 +91,7 @@ public class Player : MonoBehaviour
         else
             isGrounded = false;
     }
+
     public void SetVelocity(float xVel, float yVel)
     {
         rb.velocity = new Vector2(xVel, yVel);

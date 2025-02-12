@@ -294,7 +294,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -355,10 +355,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curHP: 10
   moveSpeed: 5
-  jumpDuration: 0.5
+  jumpDuration: 0.2
   isJumping: 0
   jumpCnt: 0
-  jumpSpeed: 5
+  jumpUpSpeed: 10
+  jumpDownSpeed: -5
   isGrounded: 0
   rb: {fileID: 0}
 --- !u!212 &1223853986
@@ -439,7 +440,7 @@ GameObject:
   - component: {fileID: 1927413742}
   - component: {fileID: 1927413741}
   - component: {fileID: 1927413743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
