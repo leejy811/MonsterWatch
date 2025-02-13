@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
-using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -62,7 +60,7 @@ public class PlayerController : MonoBehaviour
     private CameraFollowObject cameraFollowObject;
     private float fallSpeedYDampingChangeThreshold;
 
-    public Vector3[] savePoint;
+    public List<Vector3> savePoint = new List<Vector3>();
 
     [Header("Buff")]
     [SerializeField] BuffType curBuff;
@@ -352,8 +350,9 @@ public class PlayerController : MonoBehaviour
                 curHP += tempHP;
                 tempHP = 0;
             }
+            //UIManager.instance.UpdateHealth(-1);
 
-            if(curHP > 0)
+            if (curHP > 0)
             {
                 StartCoroutine(RecoilCoroutine(targetPos, damagedRecoilForce, damagedRecoilDuration));
                 StartCoroutine(TimeSlowCoroutine());
@@ -372,11 +371,12 @@ public class PlayerController : MonoBehaviour
     {
         if (curHP < maxHP)
             curHP += val;
+        //UIManager.instance.UpdateHealth(1);
     }
 
     private void Dead()
     {
-        
+        transform.position = savePoint[savePoint.Count];
     }
 
     private IEnumerator RecoilCoroutine(Vector3 targetPos, float recoilForce, float recoilDuration)
@@ -449,5 +449,16 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("AttackSpeed", 1.0f);
             attackInterval = attackIntervalOrigin;
         }
+    }
+
+    public void Save(Vector3 positon)
+    {
+        savePoint.Add(positon);
+    }
+
+    public void GetHP(int maxHP)
+    {
+        if(curHP < maxHP)
+            curHP = maxHP;
     }
 }
