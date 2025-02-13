@@ -15,6 +15,7 @@ public class BossSkill
     public float skillTime;
     [Range(0.0f, 1.0f)] public float skillProb;
     public GameObject skillPrefab;
+    public Transform skillParent;
 
     public Action skillAction;
 }
@@ -25,13 +26,27 @@ public class Boss : Enemy
     public List<BossSkill> skills;
     public Vector2Int restRange;
 
+    private float curAttackTime;
     private int curRestTime;
 
     #region Init
+
+    protected override void Awake()
+    {
+        //Components Initialize
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
+
     private void Start()
     {
         InitProb();
         InitAction();
+    }
+
+    private void Update()
+    {
+        
     }
 
     private void InitProb()
@@ -88,9 +103,11 @@ public class Boss : Enemy
         transform.DOMoveY(4.0f, 0.5f).SetEase(Ease.OutBack);
         yield return new WaitForSeconds(0.5f);
 
+        animator.SetFloat("AttackSpeed", 0.0f);
         skill.skillPrefab.SetActive(true);
         yield return new WaitForSeconds(skill.skillTime - 1f);
         skill.skillPrefab.SetActive(false);
+        animator.SetFloat("AttackSpeed", 1.0f);
 
         rb.gravityScale = prevGravity;
     }
