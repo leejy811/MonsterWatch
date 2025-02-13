@@ -30,16 +30,11 @@ public class SkillController : MonoBehaviour
 
     [Header("Invincibility Skill Info")]
     public float invincibilityTime;
+    public GameObject invincibilityBubbleObject;
 
     void Awake()
     {
         useSkill = new UseSkillDelegate[3] { ShootSkill, Poison, Invincibility };
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -65,6 +60,7 @@ public class SkillController : MonoBehaviour
 
     IEnumerator ShootCoroutine(int shootNum)
     {
+        PlayerController.instance.animator.SetBool("IsShootSkill", true);
         int playerFacingDir = PlayerController.instance.facingDir;
         while (shootNum > 0)
         {
@@ -82,6 +78,7 @@ public class SkillController : MonoBehaviour
 
             yield return new WaitForSeconds(shootDelay);
         }
+        PlayerController.instance.animator.SetBool("IsShootSkill", false);
     }
 
     void Poison()
@@ -104,7 +101,13 @@ public class SkillController : MonoBehaviour
     IEnumerator InvincibilityCoroutine()
     {
         PlayerController.instance.isInvincibility = true;
+        PlayerController.instance.animator.SetBool("IsInvincibility", true);
+        GameObject obj = Instantiate(invincibilityBubbleObject, this.transform.position, Quaternion.identity);
+
         yield return new WaitForSeconds(invincibilityTime);
+
         PlayerController.instance.isInvincibility = false;
+        PlayerController.instance.animator.SetBool("IsInvincibility", false);
+        Destroy(obj);
     }
 }

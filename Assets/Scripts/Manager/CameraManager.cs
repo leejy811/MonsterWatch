@@ -92,7 +92,6 @@ public class CameraManager : MonoBehaviour
     }
     #endregion
 
-
     #region Pan Camera
     public void PanCameraOnContact(float panDistance, float panTime, PanDirection panDirection, bool panToStartingPos)
     {

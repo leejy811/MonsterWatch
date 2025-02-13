@@ -9,6 +9,8 @@ public class CameraFollowObject : MonoBehaviour
 
     private Coroutine turnCoroutine;
     private int playerFacingDir; //right: 1, left: -1
+    private float lerpTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class CameraFollowObject : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position = playerTf.position;
+        transform.position = Vector3.Lerp(transform.position, playerTf.position, Time.deltaTime * 2.0f);
     }
 
     public void CallTurn()

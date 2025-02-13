@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Collider2D damagedCol;
     public Collider2D attackCol;
+    public Animator animator;
     #endregion
 
     void Awake()
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
         //Components Initialize
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Start is called before the first frame update
@@ -125,28 +127,20 @@ public class PlayerController : MonoBehaviour
 
     private void UpdatePlayerState()
     {
-        //_animator.SetBool("IsGround", isGrounded);
+        animator.SetBool("IsGrounded", isGrounded);
 
         float yVel = rb.velocity.y;
-        //_animator.SetBool("IsDown", yVel < 0);
+        animator.SetBool("IsFalling", yVel < 0);
 
         if (isGrounded && yVel == 0)
         {
-            //_animator.SetBool("IsJump", false);
-            //_animator.ResetTrigger("IsJumpFirst");
-            //_animator.ResetTrigger("IsJumpSecond");
-            //_animator.SetBool("IsDown", false);
+            animator.SetBool("IsJump", false);
+            animator.SetBool("IsDown", false);
 
             jumpCnt = 2;
-            //isSprintable = true;
+            isDashable = true;
         }
     }
-
-    //private void MoveControl()
-    //{
-    //    if (isMovable)
-    //        Move();
-    //}
 
     private void JumpControl()
     {
@@ -182,7 +176,8 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         // calculate movement
-        float xVel = Input.GetAxisRaw("Horizontal") * moveSpeed;
+        float xInput = Input.GetAxisRaw("Horizontal");
+        float xVel = xInput * moveSpeed;
 
         // set velocity
         Vector2 newVelocity;
@@ -204,29 +199,13 @@ public class PlayerController : MonoBehaviour
             Vector3 rotator = new Vector3(transform.rotation.x, yRot, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             facingDir *= -1;
-            //if (isGrounded)
-            //{
-            //    // turn back animation
-            //    //_animator.SetTrigger("IsRotate");
-            //}
         }
-        //else if (moveDirection > 0)
-        //{
-        //    // move forward
-        //    _animator.SetBool("IsRun", true);
-        //}
 
-        //// stop
-        //if (Input.GetAxis("Horizontal") == 0)
-        //{
-        //    _animator.SetTrigger("stopTrigger");
-        //    _animator.ResetTrigger("IsRotate");
-        //    _animator.SetBool("IsRun", false);
-        //}
-        //else
-        //{
-        //    _animator.ResetTrigger("stopTrigger");
-        //}
+        //set anim parameter
+        if (isGrounded && Mathf.Abs(xVel) > 0.0f)
+            animator.SetBool("IsWalk", true);
+        else
+            animator.SetBool("IsWalk", false);
     }
 
     private void Jump()
@@ -237,16 +216,8 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = newVelocity;
 
-        //animator.SetBool("IsJump", true);
+        animator.SetBool("IsJump", true);
         jumpCnt -= 1;
-        //if (jumpCnt == 0)
-        //{
-        //    animator.SetTrigger("IsJumpSecond");
-        //}
-        //else if (jumpCnt == 1)
-        //{
-        //    animator.SetTrigger("IsJumpFirst");
-        //}
     }
 
     private void Fall()
@@ -339,7 +310,7 @@ public class PlayerController : MonoBehaviour
         if (!isInvincibility)
         {
 
-            //curHP--;
+            curHP--;
         }
 
         if (curHP <= 0)

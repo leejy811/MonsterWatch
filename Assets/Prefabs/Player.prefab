@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7598138356920402060}
   - component: {fileID: 6077672529503358646}
   - component: {fileID: 1129651741953586079}
+  - component: {fileID: 4734243722704921593}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0089bf7f8f2477c4593a6e88ccf0a612, type: 3}
+  m_Sprite: {fileID: -453074470, guid: f285cfbd299e22641b33c973d72a75a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -133,6 +134,7 @@ MonoBehaviour:
   rb: {fileID: 1129651741953586079}
   damagedCol: {fileID: 6077672529503358646}
   attackCol: {fileID: 8648482510300712336}
+  animator: {fileID: 0}
 --- !u!114 &7598138356920402060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,13 +152,14 @@ MonoBehaviour:
   - 5
   - 2
   - 6
-  isChangable: 0
+  isChangable: 1
   shootSkillPrefabs: {fileID: 8117302857777156971, guid: cecd736bdfdc8c44594b846073d8b560, type: 3}
   shootNum: 1
   shootDist: 0.64
   shootDelay: 0.4
   poisonTime: 0
-  invincibilityTime: 0
+  invincibilityTime: 1
+  invincibilityBubbleObject: {fileID: 200120691689687496, guid: ef8565d0164f0b14384fdfb2a10b9cdc, type: 3}
 --- !u!70 &6077672529503358646
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -189,8 +192,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.2966666, y: 1.8033333}
+  m_Offset: {x: 0, y: -0.027697325}
+  m_Size: {x: 1.2966666, y: 1.9473596}
   m_Direction: 0
 --- !u!50 &1129651741953586079
 Rigidbody2D:
@@ -219,6 +222,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!95 &4734243722704921593
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745590400786163972}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e70fe8dcffa33e449aa6134263cfa4e1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4184251984858324424
 GameObject:
   m_ObjectHideFlags: 0
