@@ -11,6 +11,7 @@ public class EnemyChaseState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemy.animator.SetBool("isMoving", true);
     }
 
     public override void Exit()
@@ -27,9 +28,13 @@ public class EnemyChaseState : EnemyState
             stateMachine.ChangeState(enemy.attackState);
             return;
         }
+        else if (!enemy.CheckPlayer(enemy.chaseRange))
+        {
+            stateMachine.ChangeState(enemy.idleState);
+            return;
+        }
 
-        enemy.xDir = enemy.target.position.x > enemy.transform.position.x ? 1 : -1;
-        enemy.transform.localScale = new Vector3(enemy.transform.localScale.x * enemy.xDir, enemy.transform.localScale.y, enemy.transform.localScale.z);
+        enemy.LookTarget();
         enemy.Move(enemy.chaseMoveSpeed);
     }
 }

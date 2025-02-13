@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -19,9 +20,11 @@ public class Enemy : MonoBehaviour
     public float chaseRange = 3.0f;
     public Transform target;
 
+    private bool isDie;
+
     #region Components
-    private Rigidbody2D rb;
-    private Animator animator;
+    protected Rigidbody2D rb;
+    public Animator animator;
     #endregion
 
     #region States
@@ -60,7 +63,14 @@ public class Enemy : MonoBehaviour
 
     public virtual void Attack()
     {
-        
+        animator.SetTrigger("DoAttack");
+        LookTarget();
+    }
+
+    public void LookTarget()
+    {
+        xDir = target.position.x > transform.position.x ? 1 : -1;
+        transform.localScale = new Vector3(xDir * -1, transform.localScale.y, transform.localScale.z);
     }
 
     protected virtual IEnumerator PlayAttack()
@@ -79,6 +89,48 @@ public class Enemy : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public Vector3 OnHit(int damage)
+    {
+        OnDamage(damage);
+
+        return transform.position;
+    }
+
+    public Vector3 OnHit(int damage, int hitTimes, float second)
+    {
+        StartCoroutine(OnPoisionDamage(damage, hitTimes, second));
+
+        return transform.position;
+    }
+
+    protected IEnumerator OnPoisionDamage(int damage, int hitTimes, float second)
+    {
+        for (int i = 0;i < hitTimes;i++)
+        {
+            if (isDie) break;
+            OnDamage(damage);
+            yield return new WaitForSeconds(second);
+        }
+    }
+
+    protected void OnDamage(int damage)
+    {
+        curHP -= damage;
+
+        if (curHP < 0)
+            StartCoroutine(OnDie(1f));
+    }
+
+    protected IEnumerator OnDie(float second)
+    {
+        isDie = true;
+        gameObject.GetComponent<Collider2D>().enabled = false;
+
+        yield return new WaitForSeconds(second);
+
+        Destroy(gameObject);
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

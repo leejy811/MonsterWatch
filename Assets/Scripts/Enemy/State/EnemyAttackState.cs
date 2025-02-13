@@ -11,8 +11,6 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
-
-        stateTimer = enemy.attackCool;
     }
 
     public override void Exit()
@@ -23,6 +21,12 @@ public class EnemyAttackState : EnemyState
     public override void Update()
     {
         base.Update();
+
+        if (!enemy.CheckPlayer(enemy.attackRange))
+        {
+            stateMachine.ChangeState(enemy.chaseState);
+            return;
+        }
 
         if (stateTimer > enemy.attackCool)
         {

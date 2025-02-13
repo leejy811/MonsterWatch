@@ -17,6 +17,9 @@ public class EnemyIdleState : EnemyState
 
         ResetTimer();
         ChangeDirection();
+
+        enemy.target = null;
+        enemy.animator.SetBool("isMoving", false);
     }
 
     public override void Exit()
@@ -50,7 +53,7 @@ public class EnemyIdleState : EnemyState
         enemy.xDir = Random.Range(-1, 2);
 
         if (prevDir != enemy.xDir)
-            enemy.transform.localScale = new Vector3(enemy.transform.localScale.x * -1, enemy.transform.localScale.y, enemy.transform.localScale.z);
+            transform.localScale = new Vector3(enemy.xDir * -1, transform.localScale.y, transform.localScale.z);
     }
 
     private void ResetTimer()
