@@ -29,4 +29,5 @@ public class Trap : MonoBehaviour
             //StartCoroutine(collision.gameObject.GetComponent<Enemy>().OnDie());
         }
     }
+
 }

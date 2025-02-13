@@ -6,7 +6,7 @@ public class SavePoint : InteractableObject
 {
     protected override void OnInteraction(GameObject gameObject)
     {
-        //PlayerController.instance.Save(transform.position);
-        //PlayerController.instance.GetHP(PlayerController.instance.maxHP);
+        PlayerController.instance.Save(transform.position);
+        PlayerController.instance.GetHP(PlayerController.instance.maxHP);
     }
 }

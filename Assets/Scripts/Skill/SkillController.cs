@@ -51,6 +51,8 @@ public class SkillController : MonoBehaviour
             curSkill++;
             if ((int)curSkill > 2)
                 curSkill = 0;
+
+            //UIManager.instance.ChangeSkill();
         }
     }
 
