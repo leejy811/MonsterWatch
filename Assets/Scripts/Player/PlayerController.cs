@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -55,11 +56,17 @@ public class PlayerController : MonoBehaviour
     private CameraFollowObject cameraFollowObject;
     private float fallSpeedYDampingChangeThreshold;
 
+    public Vector3[] savePoint;
+
+    [Header("Buff")]
+    [SerializeField] BuffType curBuff;
+
     #region Components
     public Rigidbody2D rb;
     public Collider2D damagedCol;
     public Collider2D attackCol;
     public Animator animator;
+    public CinemachineImpulseSource impulseSource;
     #endregion
 
     void Awake()
@@ -78,6 +85,7 @@ public class PlayerController : MonoBehaviour
         //Components Initialize
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     // Start is called before the first frame update
@@ -115,14 +123,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         isGrounded = CheckGrounded();
-
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.CompareTag("Enemy"))
-        {
-            OnHit(collision.transform.position);
-        }
     }
 
     private void UpdatePlayerState()
@@ -273,7 +273,7 @@ public class PlayerController : MonoBehaviour
 
     private void Attack()
     {
-        //_animator.SetTrigger("IsAttack");
+        animator.SetBool("IsAttack", true);
         //attackForwardEffect.SetActive(true);
 
         StartCoroutine(AttackCoroutine(attackInterval));
@@ -285,7 +285,6 @@ public class PlayerController : MonoBehaviour
 
         ContactFilter2D filter = new ContactFilter2D();
         filter.NoFilter();
-
         List<Collider2D> targets = new List<Collider2D>();
         Physics2D.OverlapCollider(attackCol, filter, targets);
         foreach (Collider2D target in targets)
@@ -296,16 +295,19 @@ public class PlayerController : MonoBehaviour
                     target.GetComponent<Enemy>().OnHit(1,3,1);
                 else
                     target.GetComponent<Enemy>().OnHit(1);
+
+                CameraManager.instance.CameraShake(impulseSource);
             }
         }
 
         if (targets.Count > 0)
             StartCoroutine(RecoilCoroutine(targets[0].transform.position, attackRecoilForce, attackRecoilDuration));
-
+        
         // attack cool down
         isAttackable = false;
         yield return new WaitForSeconds(attackInterval);
         isAttackable = true;
+        animator.SetBool("IsAttack", false);
     }
 
     public void OnHit(Vector3 targetPos, int damage)
@@ -325,7 +327,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Dead()
+    public void HealthRecovery(int val)
+    {
+        if (curHP < maxHP)
+            curHP += val;
+    }
+
+    private void Dead()
     {
         
     }

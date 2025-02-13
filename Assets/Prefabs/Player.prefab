@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6077672529503358646}
   - component: {fileID: 1129651741953586079}
   - component: {fileID: 4734243722704921593}
+  - component: {fileID: 5187986683399677164}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -131,10 +132,12 @@ MonoBehaviour:
   damagedTimeScale: 0.4
   timeSlowDuration: 0.05
   cameraObject: {fileID: 0}
+  savePoint: []
   rb: {fileID: 1129651741953586079}
   damagedCol: {fileID: 6077672529503358646}
   attackCol: {fileID: 8648482510300712336}
   animator: {fileID: 0}
+  impulseSource: {fileID: 0}
 --- !u!114 &7598138356920402060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +246,122 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5187986683399677164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745590400786163972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 0
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: -8.986741
+        outSlope: -8.986741
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.09054214
+        value: 0.18632126
+        inSlope: -3.2128978
+        outSlope: -3.2128978
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.33367503
+        value: 0.8089714
+        inSlope: -1.1895272
+        outSlope: -1.1895272
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4578079
+        value: 0.195755
+        inSlope: -1.0047191
+        outSlope: -1.0047191
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.7314382
+        value: 0.99764556
+        inSlope: -1.1020721
+        outSlope: -1.1020721
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8491681
+        value: 0.3931371
+        inSlope: -0.5556333
+        outSlope: -0.5556333
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 4.0234394
+        outSlope: 4.0234394
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.2
+    m_ImpulseType: 0
+    m_DissipationRate: 0.25
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: 0, y: 0, z: -1}
 --- !u!1 &4184251984858324424
 GameObject:
   m_ObjectHideFlags: 0

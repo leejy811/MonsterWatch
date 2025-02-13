@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f285cfbd299e22641b33c973d72a75a3
+guid: 6c8e2e4fe2d1be74f8362256f52f22e3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,85 +97,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\uCE90\uB9AD\uD130_IDLE_0"
+      name: Player_Attack_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 96
+      alignment: 9
+      pivot: {x: 0.65618026, y: 0.22730422}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fbc60d3da9fea484997881256c22f36f
-      internalID: -453074470
+      spriteID: c687b94f881fc26439b073f3c94e4d9d
+      internalID: -1451697513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uCE90\uB9AD\uD130_IDLE_1"
+      name: Player_Attack_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 96
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 96
+      alignment: 9
+      pivot: {x: 0.6090781, y: 0.22482516}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b815e517ea2705244a51beb15adc9b24
-      internalID: -567437872
+      spriteID: 97ff89a4784c8ee40a4c39e10be7f0d6
+      internalID: 1046916322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\uCE90\uB9AD\uD130_IDLE_2"
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ebdecd15c4c352d4bb076f654e72e750
-      internalID: 1364771041
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: "\uCE90\uB9AD\uD130_IDLE_3"
+      name: Player_Attack_2
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 96
+        height: 96
+      alignment: 9
+      pivot: {x: 0.58180857, y: 0.21490896}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ea3e7bff92f3be4c8d35dbbf7d4e512
-      internalID: -440804599
+      spriteID: 0feb9a4db39df004797868bc714ec931
+      internalID: 1815001775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 96
+        height: 96
+      alignment: 9
+      pivot: {x: 0.59420395, y: 0.21490896}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28732a35abd1bc64188675635709592e
+      internalID: -1170294440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Player_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 96
+        height: 96
+      alignment: 9
+      pivot: {x: 0.58676654, y: 0.20747179}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8a79b0cbdc89de458b9a1d43d38dbcf
+      internalID: -266817195
       vertices: []
       indices: 
       edges: []
@@ -191,10 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "\uCE90\uB9AD\uD130_IDLE_0": -453074470
-      "\uCE90\uB9AD\uD130_IDLE_1": -567437872
-      "\uCE90\uB9AD\uD130_IDLE_2": 1364771041
-      "\uCE90\uB9AD\uD130_IDLE_3": -440804599
+      Player_Attack_0: -1451697513
+      Player_Attack_1: 1046916322
+      Player_Attack_2: 1815001775
+      Player_Attack_3: -1170294440
+      Player_Attack_4: -266817195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

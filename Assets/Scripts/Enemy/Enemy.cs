@@ -129,16 +129,18 @@ public class Enemy : MonoBehaviour
     protected IEnumerator OnDie(float second)
     {
         isDie = true;
-        gameObject.GetComponent<Collider2D>().enabled = false;
+        gameObject.tag = "Untagged";
+
+        animator.SetTrigger("DoDie");
 
         yield return new WaitForSeconds(second);
 
         Destroy(gameObject);
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player"))
         {
             PlayerController.instance.OnHit(transform.position, damage);
         }
