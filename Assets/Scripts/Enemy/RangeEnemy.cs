@@ -12,7 +12,6 @@ public class RangeEnemy : Enemy
 
     public override void Attack()
     {
-        base.Attack();
         StartCoroutine(PlayAttack());
     }
 
@@ -23,6 +22,7 @@ public class RangeEnemy : Enemy
         for (int i = 0;i < shootTimes;i++)
         {
             cannons.Add(Shoot());
+            animator.SetTrigger("DoAttack");
             yield return new WaitForSeconds(shootCool);
         }
 

@@ -11,7 +11,6 @@ public class EnemyChaseState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.animator.SetBool("isMoving", true);
     }
 
     public override void Exit()
