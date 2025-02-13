@@ -28,14 +28,14 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region States
-    public EnemyStateMachine stateMachine { get; private set; }
+    public EnemyStateMachine stateMachine { get; protected set; }
 
-    public EnemyIdleState idleState { get; private set; }
-    public EnemyChaseState chaseState { get; private set; }
-    public EnemyAttackState attackState { get; private set; }
+    public EnemyIdleState idleState { get; protected set; }
+    public EnemyChaseState chaseState { get; protected set; }
+    public EnemyAttackState attackState { get; protected set; }
     #endregion
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         //Components Initialize
         rb = GetComponent<Rigidbody2D>();
@@ -59,7 +59,6 @@ public class Enemy : MonoBehaviour
 
     public void Move(float speed)
     {
-        Debug.Log(xDir != 0);
         animator.SetBool("IsMoving", xDir != 0);
         transform.position += Vector3.right * xDir * speed * Time.deltaTime;
     }
@@ -126,7 +125,7 @@ public class Enemy : MonoBehaviour
             StartCoroutine(OnDie(1f));
     }
 
-    protected IEnumerator OnDie(float second)
+    protected virtual IEnumerator OnDie(float second)
     {
         isDie = true;
         gameObject.tag = "Untagged";

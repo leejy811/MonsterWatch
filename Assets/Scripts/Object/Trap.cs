@@ -7,11 +7,22 @@ public class Trap : MonoBehaviour
     public Transform respawnPoint;
     public int damage;
 
+    private IEnumerator Respawn(GameObject gameObject)
+    {
+        PlayerController.instance.OnHit(transform.position, damage);
+
+        yield return StartCoroutine(PostProcessManager.instance.FadeInOut(1f, true));
+
+        gameObject.transform.position = respawnPoint.position;
+
+        yield return StartCoroutine(PostProcessManager.instance.FadeInOut(1f, false));
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PlayerController>().OnHit(transform.position, damage);
+            Respawn(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Enemy")
         {
