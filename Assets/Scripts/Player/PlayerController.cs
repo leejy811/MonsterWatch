@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     public float attackInterval;
     public float attackRecoilDuration;
     public float attackRecoilForce;
+    public GameObject attackEffect;
 
     [Header("Damaged Info")]
     public float damagedRecoilDuration;
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
     public Collider2D damagedCol;
     public Collider2D attackCol;
     public Animator animator;
+    public Animator effectAnimator;
     public CinemachineImpulseSource impulseSource;
     #endregion
 
@@ -289,7 +291,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         animator.SetBool("IsAttack", true);
-        //attackForwardEffect.SetActive(true);
+        attackEffect.SetActive(true);
 
         StartCoroutine(AttackCoroutine(attackInterval));
     }
@@ -299,7 +301,7 @@ public class PlayerController : MonoBehaviour
         Vector2 origin = this.transform.position;
 
         ContactFilter2D filter = new ContactFilter2D();
-        filter.NoFilter();
+        filter.SetLayerMask(LayerMask.GetMask("Enemy"));
         List<Collider2D> targets = new List<Collider2D>();
         Physics2D.OverlapCollider(attackCol, filter, targets);
         foreach (Collider2D target in targets)
@@ -317,12 +319,13 @@ public class PlayerController : MonoBehaviour
 
         if (targets.Count > 0)
             StartCoroutine(RecoilCoroutine(targets[0].transform.position, attackRecoilForce, attackRecoilDuration));
-        
+
         // attack cool down
         isAttackable = false;
         yield return new WaitForSeconds(attackInterval);
         isAttackable = true;
         animator.SetBool("IsAttack", false);
+        attackEffect.SetActive(false);
     }
 
     public void OnHit(Vector3 targetPos, int damage)
@@ -339,6 +342,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(RecoilCoroutine(targetPos, damagedRecoilForce, damagedRecoilDuration));
             StartCoroutine(TimeSlowCoroutine());
+            animator.SetBool("IsDamaged", true);
         }
     }
 
@@ -361,6 +365,7 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(recoilDuration);
+        animator.SetBool("IsDamaged", false);
 
         isInputEnabled = true;
     }

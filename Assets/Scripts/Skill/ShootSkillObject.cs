@@ -30,12 +30,6 @@ public class ShootSkillObject : MonoBehaviour
     {
         lifeTimer -= Time.deltaTime;
 
-        Vector2 newVel;
-        newVel.x = Mathf.Exp((dir * moveSpeed).x * (lifeTime - lifeTimer) * 0.5f);
-        newVel.y = 0.0f;
-        rb.velocity = newVel;
-
-
         if (lifeTimer < 0.0f)
         {
             Destroy(this.gameObject);
