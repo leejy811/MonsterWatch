@@ -103,9 +103,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f4c85703c0a7a4d8b9dc805cd2ff58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHP: 100
-  maxHP: 100
-  moveSpeed: 5
+  curHP: 3
+  maxHP: 3
+  tempHP: 0
+  moveSpeed: 8
   facingDir: -1
   jumpSpeed: 15
   fallSpeed: 4
@@ -116,11 +117,11 @@ MonoBehaviour:
   dashEndDelay: 0.5
   dashCoeff: 0.8
   attackInterval: 0.3
-  attackRecoilDuration: 0.15
-  attackRecoilForce: 12
+  attackRecoilDuration: 0.11
+  attackRecoilForce: 10
   attackEffect: {fileID: 4184251984858324424}
   damagedRecoilDuration: 0.2
-  damagedRecoilForce: 20
+  damagedRecoilForce: 15
   isJumping: 0
   isFalling: 0
   isGrounded: 1
@@ -136,6 +137,8 @@ MonoBehaviour:
   cameraObject: {fileID: 0}
   savePoint: []
   curBuff: 0
+  attackScale: 1.5
+  attackSpeedCoeff: 2
   rb: {fileID: 1129651741953586079}
   damagedCol: {fileID: 6077672529503358646}
   attackCol: {fileID: 1436263907645709368}
@@ -156,9 +159,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curSkill: 0
   skillCoolTime:
-  - 5
+  - 3
   - 0
-  - 2
+  - 10
   skillUsable: 010101
   isChangable: 1
   shootSkillPrefabs: {fileID: 9162425234194950380, guid: cecd736bdfdc8c44594b846073d8b560, type: 3}
