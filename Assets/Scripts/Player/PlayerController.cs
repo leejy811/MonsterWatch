@@ -51,8 +51,9 @@ public class PlayerController : MonoBehaviour
     public float timeSlowDuration;
 
     [Header("Camera")]
-    private CameraFollowObject cameraFollowObject;
     [SerializeField] private GameObject cameraObject;
+    private CameraFollowObject cameraFollowObject;
+    private float fallSpeedYDampingChangeThreshold;
 
     #region Components
     public Rigidbody2D rb;
@@ -77,22 +78,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    public static PlayerController Instance
-    {
-        get
-        {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         cameraFollowObject = cameraObject.GetComponent<CameraFollowObject>();
+
+        fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshole;
     }
 
     // Update is called once per frame
@@ -107,6 +98,16 @@ public class PlayerController : MonoBehaviour
             SprintControl();
             AttackControl();
         }
+
+        if (rb.velocity.y < fallSpeedYDampingChangeThreshold && !CameraManager.instance.isLerpingYDamping && !CameraManager.instance.lerpedFromPlayerFalling)
+            CameraManager.instance.LerpYDamping(true);
+
+        if(rb.velocity.y >= 0.0f && !CameraManager.instance.isLerpingYDamping && CameraManager.instance.lerpedFromPlayerFalling)
+        {
+            CameraManager.instance.lerpedFromPlayerFalling = false;
+
+            CameraManager.instance.LerpYDamping(false);
+        }
     }
 
     private void FixedUpdate()
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            OnDamaged(collision.transform.position);
+            OnHit(collision.transform.position);
         }
     }
 
@@ -333,7 +334,7 @@ public class PlayerController : MonoBehaviour
         isAttackable = true;
     }
 
-    void OnDamaged(Vector3 targetPos)
+    void OnHit(Vector3 targetPos)
     {
         if (!isInvincibility)
         {

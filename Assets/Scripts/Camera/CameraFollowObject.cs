@@ -17,7 +17,7 @@ public class CameraFollowObject : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position = playerTf.position;
     }
@@ -50,8 +50,8 @@ public class CameraFollowObject : MonoBehaviour
     {
         playerFacingDir *= -1;
         if (playerFacingDir > 0)
-            return 180.0f;
-        else
             return 0.0f;
+        else
+            return 180.0f;
     }
 }
