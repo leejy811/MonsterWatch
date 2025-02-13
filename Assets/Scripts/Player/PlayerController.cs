@@ -292,7 +292,10 @@ public class PlayerController : MonoBehaviour
         {
             if (target.CompareTag("Enemy"))
             {
-                Debug.Log("Hit Enemy");
+                if(isPoison)
+                    target.GetComponent<Enemy>().OnHit(1,3,1);
+                else
+                    target.GetComponent<Enemy>().OnHit(1);
             }
         }
 
@@ -305,12 +308,12 @@ public class PlayerController : MonoBehaviour
         isAttackable = true;
     }
 
-    void OnHit(Vector3 targetPos)
+    public void OnHit(Vector3 targetPos, int damage)
     {
         if (!isInvincibility)
         {
 
-            curHP--;
+            curHP -= damage;
         }
 
         if (curHP <= 0)

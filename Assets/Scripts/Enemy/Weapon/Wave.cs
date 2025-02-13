@@ -25,7 +25,7 @@ public class Wave : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
-            //Player.OnHit(damage);
+            PlayerController.instance.OnHit(transform.position, damage);
         }
     }
 }

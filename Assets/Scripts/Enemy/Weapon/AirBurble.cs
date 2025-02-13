@@ -8,7 +8,7 @@ public class AirBurble : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //Player.OnHit(damage);
+            PlayerController.instance.OnHit(transform.position, 1);
         }
     }
 }

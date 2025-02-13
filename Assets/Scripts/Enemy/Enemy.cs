@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //Player.OnHit(damage);
+            PlayerController.instance.OnHit(transform.position, damage);
         }
     }
 }

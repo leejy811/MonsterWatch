@@ -39,7 +39,7 @@ public class Cannon : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
-            //Player.OnHit(damage);
+            PlayerController.instance.OnHit(transform.position, damage);
         }
         else if (collision.CompareTag("Ground"))
             Destroy(gameObject);
