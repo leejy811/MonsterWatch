@@ -30,12 +30,12 @@ public class ShootSkillObject : MonoBehaviour
     {
         lifeTimer -= Time.deltaTime;
 
-        //Vector2 newVel;
-        //newVel.x = Mathf.Exp((dir * moveSpeed).x * (lifeTime - lifeTimer)*0.1f);
-        //newVel.y = 0.0f;
-        //rb.velocity = newVel;
+        Vector2 newVel;
+        newVel.x = Mathf.Exp((dir * moveSpeed).x * (lifeTime - lifeTimer) * 0.5f);
+        newVel.y = 0.0f;
+        rb.velocity = newVel;
 
-        
+
         if (lifeTimer < 0.0f)
         {
             Destroy(this.gameObject);
@@ -44,6 +44,14 @@ public class ShootSkillObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject);
+        if(collision.CompareTag("Enemy") || collision.CompareTag("Ground"))
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                collision.GetComponent<Enemy>().OnHit(1);
+            }
+            Destroy(this.gameObject);
+        }
     }
 }
