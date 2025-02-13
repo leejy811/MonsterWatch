@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public Transform target;
 
     private bool isDie;
+    private bool isPoison;
 
     #region Components
     protected Rigidbody2D rb;
@@ -39,7 +40,7 @@ public class Enemy : MonoBehaviour
     {
         //Components Initialize
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         //State Initialize
         stateMachine = new EnemyStateMachine(this);
@@ -49,6 +50,11 @@ public class Enemy : MonoBehaviour
         attackState = new EnemyAttackState(this, stateMachine);
 
         stateMachine.Initialize(idleState);
+    }
+
+    protected virtual void Start()
+    {
+        target = PlayerController.instance.transform;
     }
 
     void Update()
@@ -86,7 +92,6 @@ public class Enemy : MonoBehaviour
 
         if (rayHit.collider != null)
         {
-            target = rayHit.transform;
             return true;
         }
         else
@@ -95,6 +100,8 @@ public class Enemy : MonoBehaviour
 
     public Vector3 OnHit(int damage)
     {
+        animator.SetTrigger("DoHit");
+
         OnDamage(damage);
 
         return transform.position;
@@ -102,6 +109,8 @@ public class Enemy : MonoBehaviour
 
     public Vector3 OnHit(int damage, int hitTimes, float second)
     {
+        animator.SetTrigger("DoHit");
+
         StartCoroutine(OnPoisionDamage(damage, hitTimes, second));
 
         return transform.position;
@@ -111,17 +120,21 @@ public class Enemy : MonoBehaviour
     {
         for (int i = 0;i < hitTimes;i++)
         {
-            if (isDie) break;
+            if (isDie || isPoison) break;
+
+            isPoison = true;
             OnDamage(damage);
             yield return new WaitForSeconds(second);
         }
+
+        isPoison = false;
     }
 
     protected void OnDamage(int damage)
     {
         curHP -= damage;
 
-        if (curHP < 0)
+        if (curHP <= 0)
             StartCoroutine(OnDie(1f));
     }
 

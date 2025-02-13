@@ -16,8 +16,6 @@ public class BossSkill
     [Range(0.0f, 1.0f)] public float skillProb;
     public GameObject skillPrefab;
     public Transform skillParent;
-
-    public Action skillAction;
 }
 
 public class Boss : Enemy
@@ -25,6 +23,8 @@ public class Boss : Enemy
     [Header("Skill")]
     public List<BossSkill> skills;
     public Vector2Int restRange;
+
+    public bool isStart;
 
     private float curAttackTime;
     private int curRestTime;
@@ -38,15 +38,23 @@ public class Boss : Enemy
         animator = GetComponent<Animator>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         InitProb();
-        InitAction();
     }
 
     private void Update()
     {
-        
+        //if (!isStart) return;
+
+        curAttackTime += Time.deltaTime;
+
+        if(curAttackTime > attackCool)
+        {
+            Think();
+            curAttackTime = 0.0f;
+        }
     }
 
     private void InitProb()
@@ -62,13 +70,6 @@ public class Boss : Enemy
         {
             skill.skillProb /= totalProb;
         }
-    }
-
-    private void InitAction()
-    {
-        skills[(int)BossSkillType.Butble].skillAction += BurblePattern;
-        skills[(int)BossSkillType.Wave].skillAction += WavePattern;
-        skills[(int)BossSkillType.Air].skillAction += AirPattern;
     }
     #endregion
 
@@ -89,42 +90,7 @@ public class Boss : Enemy
         WaveRight.GetComponent<Wave>().Shoot(skill.skillDamage, Vector3.right);
     }
 
-    public void AirPattern()
-    {
-        BossSkill skill = skills[(int)BossSkillType.Air];
-        StartCoroutine(PlayAirPattern(skill));
-    }
-
-    IEnumerator PlayAirPattern(BossSkill skill)
-    {
-        float prevGravity = rb.gravityScale;
-        rb.gravityScale = 0.0f;
-
-        transform.DOMoveY(4.0f, 0.5f).SetEase(Ease.OutBack);
-        yield return new WaitForSeconds(0.5f);
-
-        animator.SetFloat("AttackSpeed", 0.0f);
-        skill.skillPrefab.SetActive(true);
-        yield return new WaitForSeconds(skill.skillTime - 1f);
-        skill.skillPrefab.SetActive(false);
-        animator.SetFloat("AttackSpeed", 1.0f);
-
-        rb.gravityScale = prevGravity;
-    }
-
     #endregion
-
-    public override void Attack()
-    {
-        base.Attack();
-
-        Think();
-    }
-
-    protected override IEnumerator PlayAttack()
-    {
-        yield return null;
-    }
 
     private void Think()
     {
@@ -141,6 +107,8 @@ public class Boss : Enemy
 
         attackCool = skills[i].skillTime;
         damage = skills[i].skillDamage;
-        skills[i].skillAction.Invoke();
+
+        animator.SetInteger("SkillIdx", i);
+        animator.SetTrigger("DoAttack");
     }
 }
