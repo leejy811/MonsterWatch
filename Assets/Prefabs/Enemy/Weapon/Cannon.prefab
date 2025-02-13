@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 1120095540175663732}
   - component: {fileID: 3877650574634666098}
   - component: {fileID: -8986062177574847135}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cannon
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
