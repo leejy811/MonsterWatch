@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6c8e2e4fe2d1be74f8362256f52f22e3
+guid: 664a03661b01ee0429fc659a081d8929
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,106 +97,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Attack_0
+      name: "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 96
-        height: 96
-      alignment: 9
-      pivot: {x: 0.65618026, y: 0.22730422}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c687b94f881fc26439b073f3c94e4d9d
-      internalID: -1451697513
+      spriteID: ee184e47e8e77464d8fd9319383f962c
+      internalID: 1230374322
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack_1
+      name: "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_1"
       rect:
         serializedVersion: 2
-        x: 96
+        x: 64
         y: 0
-        width: 96
-        height: 96
-      alignment: 9
-      pivot: {x: 0.6090781, y: 0.22482516}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 97ff89a4784c8ee40a4c39e10be7f0d6
-      internalID: 1046916322
+      spriteID: 1d16932fd3ffa3b46bd0d1a904e81608
+      internalID: 1500695134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack_2
+      name: "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_2"
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc488af38d011542b340949f24f50bd
+      internalID: -1946361772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_3"
       rect:
         serializedVersion: 2
         x: 192
         y: 0
-        width: 96
-        height: 96
-      alignment: 9
-      pivot: {x: 0.58180857, y: 0.21490896}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0feb9a4db39df004797868bc714ec931
-      internalID: 1815001775
+      spriteID: 2e727937593ab064aa1737a02f02ea1b
+      internalID: -106529273
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack_3
+      name: "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_4"
       rect:
         serializedVersion: 2
-        x: 288
+        x: 256
         y: 0
-        width: 96
-        height: 96
-      alignment: 9
-      pivot: {x: 0.59420395, y: 0.21490896}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28732a35abd1bc64188675635709592e
-      internalID: -1170294440
+      spriteID: 8e0155826a601e4449c6d74ad628c11b
+      internalID: -439529353
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack_4
+      name: "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_5"
       rect:
         serializedVersion: 2
-        x: 384
+        x: 320
         y: 0
-        width: 96
-        height: 96
-      alignment: 9
-      pivot: {x: 0.58676654, y: 0.20747179}
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8a79b0cbdc89de458b9a1d43d38dbcf
-      internalID: -266817195
+      spriteID: 0d9c05e66de8997419761f0f2f27564c
+      internalID: -1831183135
       vertices: []
       indices: 
       edges: []
@@ -212,11 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Attack_0: -1451697513
-      Player_Attack_1: 1046916322
-      Player_Attack_2: 1815001775
-      Player_Attack_3: -1170294440
-      Player_Attack_4: -266817195
+      "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_0": 1230374322
+      "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_1": 1500695134
+      "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_2": -1946361772
+      "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_3": -106529273
+      "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_4": -439529353
+      "\uCE90\uB9AD\uD130_\uC77C\uBC18\uACF5\uACA9(\uCE90\uB9AD\uD130)_5": -1831183135
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

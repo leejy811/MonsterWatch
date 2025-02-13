@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1129651741953586079}
   - component: {fileID: 4734243722704921593}
   - component: {fileID: 5187986683399677164}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -117,8 +117,8 @@ MonoBehaviour:
   attackInterval: 0.3
   attackRecoilDuration: 0.15
   attackRecoilForce: 15
-  damagedRecoilDuration: 0.3
-  damagedRecoilForce: 20
+  damagedRecoilDuration: 0.1
+  damagedRecoilForce: 30
   isJumping: 0
   isFalling: 0
   isGrounded: 1
@@ -129,10 +129,11 @@ MonoBehaviour:
   isPoison: 0
   isInvincibility: 0
   invincibilityTimeScale: 0.3
-  damagedTimeScale: 0.4
-  timeSlowDuration: 0.05
+  damagedTimeScale: 0
+  timeSlowDuration: 0.1
   cameraObject: {fileID: 0}
   savePoint: []
+  curBuff: 0
   rb: {fileID: 1129651741953586079}
   damagedCol: {fileID: 6077672529503358646}
   attackCol: {fileID: 8648482510300712336}

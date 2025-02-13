@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using Cinemachine;
+using UnityEditor.ShaderGraph.Internal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,8 +23,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Dash Info")]
     public float dashDist = 1.0f;
-    public float dashDuration;
     public float dashInterval;
+    public float dashStartDelay;
+    public float dashEndDelay;
     public float dashCoeff;
 
     [Header("Attack Info")]
@@ -240,6 +242,20 @@ public class PlayerController : MonoBehaviour
         isDashable = false;
         isDashReset = false;
 
+        StartCoroutine(DashCoroutine(dashInterval, dashStartDelay, dashEndDelay));
+    }
+
+    private IEnumerator DashCoroutine(float dashInterval, float dashStartDelay, float dashEndDelay)
+    {
+        //anim
+        animator.SetBool("IsDashStart", true);
+        rb.velocity = new Vector2(0, 0);
+        float gravityScale = rb.gravityScale;
+        rb.gravityScale = 0.0f;
+
+        yield return new WaitForSeconds(dashStartDelay);
+        animator.SetBool("IsDashStart", false);
+
         Vector2 dashPos;
         dashPos.x = this.transform.position.x + facingDir * dashDist;
         dashPos.y = this.transform.position.y;
@@ -253,15 +269,14 @@ public class PlayerController : MonoBehaviour
         }
         transform.position = dashPos;
 
-        //_animator.SetTrigger("IsSprint");
-        StartCoroutine(DashCoroutine(dashDuration, dashInterval));
-    }
 
-    private IEnumerator DashCoroutine(float dashDelay, float dashInterval)
-    {
-        yield return new WaitForSeconds(dashDelay);
+        animator.SetBool("IsDashEnd", true);
+        yield return new WaitForSeconds(dashEndDelay);
+        animator.SetBool("IsDashEnd", false);
+
         isInputEnabled = true;
         isDashable = true;
+        rb.gravityScale = gravityScale;
 
         if (!isGrounded)
             yield return new WaitUntil(() => isGrounded);
@@ -356,7 +371,6 @@ public class PlayerController : MonoBehaviour
             Time.timeScale = invincibilityTimeScale;
         else
             Time.timeScale = damagedTimeScale;
-        Debug.Log(Time.timeScale);
         yield return new WaitForSecondsRealtime(timeSlowDuration);
         Time.timeScale = 1.0f;
     }
@@ -370,6 +384,4 @@ public class PlayerController : MonoBehaviour
         else
             return false;
     }
-
-
 }

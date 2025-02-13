@@ -1232,29 +1232,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1745590400786163972, guid: 5b4887eb05ffd6640bfe8f0d32229203, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1954338961421606589, guid: 5b4887eb05ffd6640bfe8f0d32229203, type: 3}
       propertyPath: cameraObject
       value: 
       objectReference: {fileID: 1127430057}
     - target: {fileID: 1954338961421606589, guid: 5b4887eb05ffd6640bfe8f0d32229203, type: 3}
-      propertyPath: damagedTimeScale
-      value: 0
+      propertyPath: dashEndDelay
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1954338961421606589, guid: 5b4887eb05ffd6640bfe8f0d32229203, type: 3}
-      propertyPath: timeSlowDuration
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1954338961421606589, guid: 5b4887eb05ffd6640bfe8f0d32229203, type: 3}
-      propertyPath: damagedRecoilForce
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1954338961421606589, guid: 5b4887eb05ffd6640bfe8f0d32229203, type: 3}
-      propertyPath: damagedRecoilDuration
-      value: 0.1
+      propertyPath: dashStartDelay
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5804932008635580030, guid: 5b4887eb05ffd6640bfe8f0d32229203, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1463,7 +1451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5610284268988401889, guid: 144b14c22d640164c991b2004d76cf93, type: 3}
       propertyPath: orthographic size
-      value: 8.4375
+      value: 5.0585284
       objectReference: {fileID: 0}
     - target: {fileID: 8534134452897475092, guid: 144b14c22d640164c991b2004d76cf93, type: 3}
       propertyPath: m_BoundingShape2D
