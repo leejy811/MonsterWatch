@@ -357,7 +357,7 @@ public class PlayerController : MonoBehaviour
         else
             Time.timeScale = damagedTimeScale;
         Debug.Log(Time.timeScale);
-        yield return new WaitForSeconds(timeSlowDuration);
+        yield return new WaitForSecondsRealtime(timeSlowDuration);
         Time.timeScale = 1.0f;
     }
 
