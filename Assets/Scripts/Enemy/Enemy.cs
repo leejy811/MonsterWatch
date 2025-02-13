@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     {
         //Components Initialize
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
 
         //State Initialize
         stateMachine = new EnemyStateMachine(this);
@@ -49,6 +49,11 @@ public class Enemy : MonoBehaviour
         attackState = new EnemyAttackState(this, stateMachine);
 
         stateMachine.Initialize(idleState);
+    }
+
+    protected virtual void Start()
+    {
+        target = PlayerController.instance.transform;
     }
 
     void Update()
@@ -86,7 +91,6 @@ public class Enemy : MonoBehaviour
 
         if (rayHit.collider != null)
         {
-            target = rayHit.transform;
             return true;
         }
         else

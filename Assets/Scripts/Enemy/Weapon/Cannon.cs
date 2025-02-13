@@ -25,12 +25,15 @@ public class Cannon : MonoBehaviour
         target = _target;
 
         rigid.AddForce(new Vector2(0, shootForce), ForceMode2D.Impulse);
+
+        Debug.Log(target);
     }
 
     public void Fall()
     {
         float ranX = Random.Range(-1f, 1f);
         transform.position = new Vector3(target.position.x + ranX, yOffest, transform.position.z);
+        transform.localScale = new Vector3(1, -1, 1) * transform.localScale.x;
         circleCollider.enabled = true;
     }
 

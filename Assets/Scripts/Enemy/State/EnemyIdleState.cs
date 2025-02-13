@@ -17,8 +17,6 @@ public class EnemyIdleState : EnemyState
 
         ResetTimer();
         ChangeDirection();
-
-        enemy.target = null;
     }
 
     public override void Exit()

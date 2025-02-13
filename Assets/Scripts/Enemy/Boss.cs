@@ -38,8 +38,9 @@ public class Boss : Enemy
         animator = GetComponent<Animator>();
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         InitProb();
         InitAction();
     }
