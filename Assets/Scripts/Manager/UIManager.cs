@@ -17,4 +17,17 @@ public class UIManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
+
+    public HealthUI healthUI;
+    public SkillUI skillUI;
+
+    public void UpdateHealth(int amount)
+    {
+        healthUI.UpdateLife(amount);
+    }
+
+    public void ChangeSkill()
+    {
+        skillUI.ChangeSkill();
+    }
 }

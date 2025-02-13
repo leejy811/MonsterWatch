@@ -7,8 +7,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public bool isEnterBoss;
-
     private void Awake()
     {
         if(instance != null && instance != this)
@@ -21,13 +19,22 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadScene(string sceneName)
+    public IEnumerator LoadScene(string sceneName, float fadeSecond)
     {
+        StartCoroutine(PostProcessManager.instance.FadeInOut(fadeSecond, true));
+        StartCoroutine(PostProcessManager.instance.VignetteInOut(fadeSecond, 1.0f));
+
+        yield return new WaitForSeconds(fadeSecond);
+
         SceneManager.LoadScene(sceneName);
     }
 
     public void ExitGame()
     {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 }
