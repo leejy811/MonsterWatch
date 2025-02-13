@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using Cinemachine;
 using UnityEditor.ShaderGraph.Internal;
+using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public int curHP = 3;
     public int maxHP = 3;
+    public int tempHP = 0;
 
     [Header("Move Info")]
     public float moveSpeed = 1.0f;
@@ -30,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Attack Info")]
     public float attackInterval;
+    private float attackIntervalOrigin;
     public float attackRecoilDuration;
     public float attackRecoilForce;
     public GameObject attackEffect;
@@ -63,6 +66,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("Buff")]
     [SerializeField] BuffType curBuff;
+    [SerializeField] float attackScale;
+    [SerializeField] float attackSpeedCoeff;
+
+    [Header("Skill")]
+    int poisonTime = 5;
+    int poisonDamage = 1;
+    float poisonSeconds = 15.0f;
 
     #region Components
     public Rigidbody2D rb;
@@ -90,6 +100,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+
+        attackIntervalOrigin = attackInterval;
     }
 
     // Start is called before the first frame update
@@ -139,7 +151,6 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && yVel == 0)
         {
             animator.SetBool("IsJump", false);
-            animator.SetBool("IsDown", false);
 
             jumpCnt = 2;
             isDashable = true;
@@ -308,11 +319,10 @@ public class PlayerController : MonoBehaviour
         {
             if (target.CompareTag("Enemy"))
             {
-                if(isPoison)
-                    target.GetComponent<Enemy>().OnHit(1,3,1);
+                if (isPoison)
+                    target.GetComponent<Enemy>().OnHit(poisonDamage, poisonTime, poisonSeconds);
                 else
                     target.GetComponent<Enemy>().OnHit(1);
-
                 CameraManager.instance.CameraShake(impulseSource);
             }
         }
@@ -332,17 +342,29 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvincibility)
         {
+            if (tempHP > 0)
+                tempHP -= damage;
+            else
+                curHP -= damage;
 
-            curHP -= damage;
+            if (tempHP < 0)
+            {
+                curHP += tempHP;
+                tempHP = 0;
+            }
+
+            if(curHP > 0)
+            {
+                StartCoroutine(RecoilCoroutine(targetPos, damagedRecoilForce, damagedRecoilDuration));
+                StartCoroutine(TimeSlowCoroutine());
+                animator.SetBool("IsDamaged", true);
+            }
+            else
+                Dead();
         }
-
-        if (curHP <= 0)
-            Dead();
         else
         {
-            StartCoroutine(RecoilCoroutine(targetPos, damagedRecoilForce, damagedRecoilDuration));
             StartCoroutine(TimeSlowCoroutine());
-            animator.SetBool("IsDamaged", true);
         }
     }
 
@@ -363,6 +385,7 @@ public class PlayerController : MonoBehaviour
         Vector3 recoilDir = this.transform.position - targetPos;
         recoilDir.Normalize();
         rb.AddForce(recoilDir * recoilForce, ForceMode2D.Impulse);
+        CameraManager.instance.CameraShake(impulseSource);
 
         yield return new WaitForSeconds(recoilDuration);
         animator.SetBool("IsDamaged", false);
@@ -388,5 +411,43 @@ public class PlayerController : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    public void GetBuff(BuffType type, int value)
+    {
+        if(type == BuffType.Health)
+        {
+            tempHP = value;
+
+            //reset size up buff
+            attackEffect.transform.localScale = new Vector3(2, 2, 1);
+
+            //reset speed up buff
+            effectAnimator.SetFloat("AttackSpeed", 1.0f);
+            animator.SetFloat("AttackSpeed", 1.0f);
+            attackInterval = attackIntervalOrigin;
+        }
+        else if(type==BuffType.AttackSpeedUp)
+        {
+            effectAnimator.SetFloat("AttackSpeed", 2.0f);
+            animator.SetFloat("AttackSpeed", 2.0f);
+            attackInterval = attackIntervalOrigin / attackSpeedCoeff;
+
+            //reset hp buff
+            tempHP = 0;
+            attackEffect.transform.localScale = new Vector3(2, 2, 1);
+        }
+        else if (type == BuffType.AttackSizeUp)
+        {
+            attackEffect.transform.localScale = attackEffect.transform.localScale * attackScale;
+
+            //reset hp buff
+            tempHP = 0;
+
+            //reset speed up buff
+            effectAnimator.SetFloat("AttackSpeed", 1.0f);
+            animator.SetFloat("AttackSpeed", 1.0f);
+            attackInterval = attackIntervalOrigin;
+        }
     }
 }

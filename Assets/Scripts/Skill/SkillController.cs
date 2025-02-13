@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Collections;
 using UnityEngine;
 
@@ -17,11 +18,11 @@ public class SkillController : MonoBehaviour
 
     public SkillList curSkill = 0;
     public float[] skillCoolTime;
+    public bool[] skillUsable;
     public bool isChangable;
 
     [Header("Shoot Skill Info")]
     public GameObject shootSkillPrefabs;
-    public int shootNum;
     public float shootDist;
     public float shootDelay;
 
@@ -40,7 +41,7 @@ public class SkillController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && skillUsable[(int)curSkill])
         {
             useSkill[(int)curSkill]();
         }
@@ -55,29 +56,26 @@ public class SkillController : MonoBehaviour
 
     void ShootSkill()
     {
-        StartCoroutine(ShootCoroutine(shootNum));
+        StartCoroutine(ShootCoroutine());
+        StartCoroutine(CoolDownCoroutine());
     }
 
-    IEnumerator ShootCoroutine(int shootNum)
+    IEnumerator ShootCoroutine()
     {
         PlayerController.instance.animator.SetBool("IsShootSkill", true);
         int playerFacingDir = PlayerController.instance.facingDir;
-        while (shootNum > 0)
-        {
-            shootNum--;
-            Vector3 initPos;
-            initPos.x = this.transform.position.x + playerFacingDir * shootDist;
-            initPos.y = this.transform.position.y;
-            initPos.z = this.transform.position.z;
+        Vector3 initPos;
+        initPos.x = this.transform.position.x + playerFacingDir * shootDist;
+        initPos.y = this.transform.position.y;
+        initPos.z = this.transform.position.z;
 
-            GameObject amulet = Instantiate(shootSkillPrefabs, initPos, Quaternion.identity);
+        GameObject amulet = Instantiate(shootSkillPrefabs, initPos, Quaternion.identity);
 
-            ShootSkillObject obj = amulet.GetComponent<ShootSkillObject>();
-            if (obj != null)
-                obj.Initialize(new Vector2(playerFacingDir, 0));
+        ShootSkillObject obj = amulet.GetComponent<ShootSkillObject>();
+        if (obj != null)
+            obj.Initialize(new Vector2(playerFacingDir, 0));
 
-            yield return new WaitForSeconds(shootDelay);
-        }
+        yield return new WaitForSeconds(shootDelay);
         PlayerController.instance.animator.SetBool("IsShootSkill", false);
     }
 
@@ -96,18 +94,35 @@ public class SkillController : MonoBehaviour
     void Invincibility()
     {
         StartCoroutine(InvincibilityCoroutine());
+        StartCoroutine(CoolDownCoroutine());
     }
 
     IEnumerator InvincibilityCoroutine()
     {
         PlayerController.instance.isInvincibility = true;
+        PlayerController.instance.isInputEnabled = false;
         PlayerController.instance.animator.SetBool("IsInvincibility", true);
-        GameObject obj = Instantiate(invincibilityBubbleObject, this.transform.position, Quaternion.identity);
+        GameObject obj = Instantiate(invincibilityBubbleObject, this.transform.position, Quaternion.identity, PlayerController.instance.transform);
 
-        yield return new WaitForSeconds(invincibilityTime);
+        float timer = invincibilityTime;
+        while(timer > 0.0f)
+        {
+            timer -= Time.deltaTime;
+            if (PlayerController.instance.isGrounded)
+                PlayerController.instance.rb.velocity = Vector2.zero;
+            yield return null;
+        }
 
         PlayerController.instance.isInvincibility = false;
+        PlayerController.instance.isInputEnabled = true;
         PlayerController.instance.animator.SetBool("IsInvincibility", false);
         Destroy(obj);
+    }
+
+    IEnumerator CoolDownCoroutine()
+    {
+        skillUsable[(int)curSkill] = false;
+        yield return new WaitForSeconds(skillCoolTime[(int)curSkill]);
+        skillUsable[(int)curSkill] = true;
     }
 }

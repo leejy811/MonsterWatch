@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BuffType { Health, AttackSpeed }
+public enum BuffType { Health, AttackSpeedUp, AttackSizeUp }
 
 public class Well : InteractableObject
 {
@@ -11,7 +11,6 @@ public class Well : InteractableObject
 
     protected override void OnInteraction(GameObject gameObject)
     {
-        //Player player = gameObject.GetComponent<Player>();
-        //player.GetBuff(buffType, buffValues[(int)buffType]);
+        PlayerController.instance.GetBuff(buffType, buffValues[(int)buffType]);
     }
 }
