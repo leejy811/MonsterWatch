@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
 
     public Image[] healthgauge0;  // 체력바를 구성하는 여러 Image들
 
-    public int maxHealth = 9;   // 최대 체력
+    public int maxHealth = 3;   // 최대 체력
     public int currentHealth;     // 현재 체력
 
 
