@@ -138,7 +138,7 @@ public class Enemy : MonoBehaviour
             StartCoroutine(OnDie(1f));
     }
 
-    protected virtual IEnumerator OnDie(float second)
+    public virtual IEnumerator OnDie(float second)
     {
         isDie = true;
         gameObject.tag = "Untagged";

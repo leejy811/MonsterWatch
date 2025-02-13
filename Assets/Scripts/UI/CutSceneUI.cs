@@ -17,7 +17,7 @@ public class CutSceneUI : MonoBehaviour
         {
             curIdx++;
 
-            if(curIdx == sprites.Length)
+            if(curIdx >= sprites.Length)
             {
                 image.DOFade(0.0f, 1.0f).OnComplete(() =>
                 {

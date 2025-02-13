@@ -162,11 +162,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5427e5a2bbc5ea4c90ff06ae3b40c02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHP: 10
+  curHP: 50
   idleMoveSpeed: 1
   chaseMoveSpeed: 1.5
   xDir: 0
-  damage: 0
+  damage: 1
   attackRange: 10
   attackCool: 2
   chaseRange: 10
@@ -174,19 +174,19 @@ MonoBehaviour:
   animator: {fileID: 0}
   skills:
   - skillType: 0
-    skillDamage: 0
+    skillDamage: 1
     skillTime: 3
     skillProb: 0.33
     skillPrefab: {fileID: 5423504880837300339, guid: d0e0dc7e2cff3604e890918d29227bda, type: 3}
     skillParent: {fileID: 4659819181508605000}
   - skillType: 1
-    skillDamage: 0
+    skillDamage: 1
     skillTime: 3
     skillProb: 0.33
     skillPrefab: {fileID: 7195808019249858276, guid: 8c72d3a071ffc0b41970ba16a94ed8fd, type: 3}
     skillParent: {fileID: 176462276840982473}
   - skillType: 2
-    skillDamage: 0
+    skillDamage: 1
     skillTime: 3
     skillProb: 0.33
     skillPrefab: {fileID: 5642674615113791745}

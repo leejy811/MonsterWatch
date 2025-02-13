@@ -7,18 +7,13 @@ public class HealthUI : MonoBehaviour
 {
     public Transform lifeParent;
     public GameObject lifePrefab;
+    public List<GameObject> lives = new List<GameObject>();
 
-    private List<GameObject> lives = new List<GameObject>();
     private int maxLive;
 
     void Start()
     {
         maxLive = PlayerController.instance.maxHP;
-
-        for (int i = 0; i < maxLive; i++)
-        {
-            AddLife();
-        }
     }
 
     void AddLife()
@@ -46,6 +41,11 @@ public class HealthUI : MonoBehaviour
             {
                 Destroy(lives[maxLive]);
                 lives.RemoveAt(maxLive);
+            }
+
+            for (int i = 0; i < tempHP; i++)
+            {
+                AddLife();
             }
         }
     }

@@ -6,21 +6,38 @@ public class InteractableObject : MonoBehaviour
 {
     public bool interactable;
 
+    private bool inObject;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && inObject)
+        {
+            OnInteraction(PlayerController.instance.gameObject);
+        }
+    }
+
     protected virtual void OnInteraction(GameObject gameObject)
     {
 
     }
 
-    protected void OnTriggerStay2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (!interactable) return;
 
         if (collision.tag == "Player")
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                OnInteraction(collision.gameObject);
-            }
+            inObject = true;
+        }
+    }
+
+    protected void OnTriggerExit2D(Collider2D collision)
+    {
+        if (!interactable) return;
+
+        if (collision.tag == "Player")
+        {
+            inObject = false;
         }
     }
 }

@@ -10,8 +10,10 @@ public class Well : InteractableObject
     public int[] buffValues;
     public Sprite offSprite;
 
-    protected override void OnInteraction(GameObject gameObject)
+    protected override void OnInteraction(GameObject _gameObject)
     {
+        if (!interactable) return;
+
         PlayerController.instance.GetBuff(buffType, buffValues[(int)buffType]);
 
         interactable = false;

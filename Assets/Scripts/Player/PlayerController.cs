@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
         attackIntervalOrigin = attackInterval;
+        savePoint.Add(transform.position);
     }
 
     // Start is called before the first frame update
@@ -361,7 +362,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("IsDamaged", true);
             }
             else
-                Dead();
+                StartCoroutine(Dead());
         }
         else
         {
@@ -376,9 +377,17 @@ public class PlayerController : MonoBehaviour
         UIManager.instance.UpdateHealth();
     }
 
-    private void Dead()
+    private IEnumerator Dead()
     {
-        transform.position = savePoint[savePoint.Count];
+        StartCoroutine(PostProcessManager.instance.FadeInOut(2f, true));
+
+        yield return new WaitForSeconds(2f);
+
+        transform.position = savePoint[savePoint.Count - 1];
+        GetHP(maxHP);
+        UIManager.instance.UpdateHealth();
+
+        StartCoroutine(PostProcessManager.instance.FadeInOut(2f, false));
     }
 
     private IEnumerator RecoilCoroutine(Vector3 targetPos, float recoilForce, float recoilDuration)
@@ -462,5 +471,6 @@ public class PlayerController : MonoBehaviour
     {
         if(curHP < maxHP)
             curHP = maxHP;
+        UIManager.instance.UpdateHealth();
     }
 }

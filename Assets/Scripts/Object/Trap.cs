@@ -22,11 +22,11 @@ public class Trap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Respawn(collision.gameObject);
+            StartCoroutine(Respawn(collision.gameObject));
         }
         else if (collision.gameObject.tag == "Enemy")
         {
-            //StartCoroutine(collision.gameObject.GetComponent<Enemy>().OnDie());
+            StartCoroutine(collision.gameObject.GetComponent<Enemy>().OnDie(1f));
         }
     }
 
