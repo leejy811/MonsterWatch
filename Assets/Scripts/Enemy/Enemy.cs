@@ -95,6 +95,8 @@ public class Enemy : MonoBehaviour
 
     public Vector3 OnHit(int damage)
     {
+        animator.SetTrigger("DoHit");
+
         OnDamage(damage);
 
         return transform.position;
@@ -102,6 +104,8 @@ public class Enemy : MonoBehaviour
 
     public Vector3 OnHit(int damage, int hitTimes, float second)
     {
+        animator.SetTrigger("DoHit");
+
         StartCoroutine(OnPoisionDamage(damage, hitTimes, second));
 
         return transform.position;
