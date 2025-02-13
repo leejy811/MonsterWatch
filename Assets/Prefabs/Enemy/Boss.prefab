@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 197334422766322550}
   - component: {fileID: 2151686042487842048}
-  - component: {fileID: 8175741056638596423}
   m_Layer: 7
   m_Name: Sprite
   m_TagString: Untagged
@@ -85,27 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &8175741056638596423
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508616199408881951}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c0d5d44b6a6dfb14a88ce606cfaac0f0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2868113836393483398
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +96,7 @@ GameObject:
   - component: {fileID: 4098232341931734644}
   - component: {fileID: 3759093213841050666}
   - component: {fileID: 5683209376993960515}
+  - component: {fileID: 105745560048995272}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Enemy
@@ -196,20 +175,20 @@ MonoBehaviour:
   skills:
   - skillType: 0
     skillDamage: 0
-    skillTime: 5
-    skillProb: 0.3
+    skillTime: 3
+    skillProb: 0.33
     skillPrefab: {fileID: 5423504880837300339, guid: d0e0dc7e2cff3604e890918d29227bda, type: 3}
     skillParent: {fileID: 4659819181508605000}
   - skillType: 1
     skillDamage: 0
-    skillTime: 5
-    skillProb: 0.3
+    skillTime: 3
+    skillProb: 0.33
     skillPrefab: {fileID: 7195808019249858276, guid: 8c72d3a071ffc0b41970ba16a94ed8fd, type: 3}
     skillParent: {fileID: 176462276840982473}
   - skillType: 2
     skillDamage: 0
-    skillTime: 5
-    skillProb: 0.4
+    skillTime: 3
+    skillProb: 0.33
     skillPrefab: {fileID: 5642674615113791745}
     skillParent: {fileID: 0}
   restRange: {x: 0, y: 0}
@@ -259,6 +238,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.3368912, y: 5.48696}
   m_EdgeRadius: 0
+--- !u!95 &105745560048995272
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2868113836393483398}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0d5d44b6a6dfb14a88ce606cfaac0f0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5642674615113791745
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +286,7 @@ Transform:
   m_GameObject: {fileID: 5642674615113791745}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6.38, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -324,8 +324,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.5, y: 0}
-  m_Size: {x: 3, y: 4}
+  m_Offset: {x: 0.69565815, y: 0}
+  m_Size: {x: 4.3913164, y: 4.3913164}
   m_Direction: 0
 --- !u!114 &343169520194743521
 MonoBehaviour:
@@ -364,7 +364,7 @@ Transform:
   m_GameObject: {fileID: 6165722388614924059}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.32, y: 0, z: 0}
+  m_LocalPosition: {x: -2.21, y: 1.82, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

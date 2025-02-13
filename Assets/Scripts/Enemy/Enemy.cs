@@ -134,7 +134,7 @@ public class Enemy : MonoBehaviour
     {
         curHP -= damage;
 
-        if (curHP < 0)
+        if (curHP <= 0)
             StartCoroutine(OnDie(1f));
     }
 
