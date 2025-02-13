@@ -65,11 +65,12 @@ public class SkillController : MonoBehaviour
 
     IEnumerator ShootCoroutine(int shootNum)
     {
-        while(shootNum > 0)
+        int playerFacingDir = PlayerController.instance.facingDir;
+        while (shootNum > 0)
         {
             shootNum--;
             Vector3 initPos;
-            initPos.x = this.transform.position.x + this.transform.localScale.x * -shootDist;
+            initPos.x = this.transform.position.x + playerFacingDir * shootDist;
             initPos.y = this.transform.position.y;
             initPos.z = this.transform.position.z;
 
@@ -77,7 +78,7 @@ public class SkillController : MonoBehaviour
 
             ShootSkillObject obj = amulet.GetComponent<ShootSkillObject>();
             if (obj != null)
-                obj.Initialize(initPos - this.transform.position);
+                obj.Initialize(new Vector2(playerFacingDir, 0));
 
             yield return new WaitForSeconds(shootDelay);
         }

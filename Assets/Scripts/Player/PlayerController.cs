@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Move Info")]
     public float moveSpeed = 1.0f;
+    public int facingDir = -1; //right: 1, left: -1
 
     [Header("Jump Info")]
     public float jumpSpeed = 5.0f;
@@ -48,6 +49,10 @@ public class PlayerController : MonoBehaviour
     public float invincibilityTimeScale;
     public float damagedTimeScale;
     public float timeSlowDuration;
+
+    [Header("Camera")]
+    private CameraFollowObject cameraFollowObject;
+    [SerializeField] private GameObject cameraObject;
 
     #region Components
     public Rigidbody2D rb;
@@ -87,7 +92,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        cameraFollowObject = cameraObject.GetComponent<CameraFollowObject>();
     }
 
     // Update is called once per frame
@@ -184,19 +189,20 @@ public class PlayerController : MonoBehaviour
         newVelocity.y = rb.velocity.y;
         rb.velocity = newVelocity;
 
-        // the sprite itself is inversed 
-        float moveDirection = -transform.localScale.x * xVel;
-        if (moveDirection < 0)
+        // the sprite turn
+        if(xVel * facingDir < 0)
         {
             // flip player sprite
-            Vector3 newScale;
-            float xScale = Mathf.Abs(transform.localScale.x);
-            newScale.x = xVel < 0 ? xScale : -xScale;
-            newScale.y = transform.localScale.y;
-            newScale.z = transform.localScale.z;
+            float yRot;
+            if (facingDir > 0)
+                yRot = 0.0f;
+            else
+                yRot = 180.0f;
+            cameraFollowObject.CallTurn();
 
-            transform.localScale = newScale;
-
+            Vector3 rotator = new Vector3(transform.rotation.x, yRot, transform.rotation.z);
+            transform.rotation = Quaternion.Euler(rotator);
+            facingDir *= -1;
             //if (isGrounded)
             //{
             //    // turn back animation
@@ -263,7 +269,7 @@ public class PlayerController : MonoBehaviour
         isDashReset = false;
 
         Vector2 dashPos;
-        dashPos.x = this.transform.position.x + this.transform.localScale.x * -dashDist;
+        dashPos.x = this.transform.position.x + facingDir * dashDist;
         dashPos.y = this.transform.position.y;
 
         RaycastHit2D hit = Physics2D.Raycast(this.transform.position, dashPos - (Vector2)this.transform.position, dashDist, LayerMask.GetMask("Ground", "Enemy"));
@@ -271,7 +277,7 @@ public class PlayerController : MonoBehaviour
         if (hit)
         {
             float newDist = Vector2.Distance(hit.point, (Vector2)this.transform.position) * dashCoeff - damagedCol.bounds.size.x / 2.0f;
-            dashPos.x = this.transform.position.x + this.transform.localScale.x * -newDist;
+            dashPos.x = this.transform.position.x + facingDir * newDist;
         }
         transform.position = dashPos;
 

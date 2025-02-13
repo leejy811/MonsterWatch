@@ -30,10 +30,10 @@ public class ShootSkillObject : MonoBehaviour
     {
         lifeTimer -= Time.deltaTime;
 
-        Vector2 newVel;
-        newVel.x = Mathf.Exp((dir * moveSpeed).x * (lifeTime - lifeTimer)*0.1f);
-        newVel.y = 0.0f;
-        rb.velocity = newVel;
+        //Vector2 newVel;
+        //newVel.x = Mathf.Exp((dir * moveSpeed).x * (lifeTime - lifeTimer)*0.1f);
+        //newVel.y = 0.0f;
+        //rb.velocity = newVel;
 
         
         if (lifeTimer < 0.0f)
