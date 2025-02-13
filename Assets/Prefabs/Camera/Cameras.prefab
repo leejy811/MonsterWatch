@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5.0585284
+    OrthographicSize: 6.75
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5.0585284
+    OrthographicSize: 6.75
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -376,7 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoundingShape2D: {fileID: 0}
-  m_Damping: 0.5
+  m_Damping: 0
   m_MaxWindowSize: -1
   m_Padding: 0
 --- !u!114 &5471071426667675691
@@ -455,8 +455,9 @@ MonoBehaviour:
   - {fileID: 577703322077367950}
   - {fileID: 138496690259238382}
   fallPanAmount: 0.25
-  fallYPanTime: 10
+  fallYPanTime: 0.5
   fallSpeedYDampingChangeThreshole: -10
+  globalShakeForce: 1
 --- !u!1 &5313081900234097625
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,7 +514,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5.0585284
+    OrthographicSize: 6.75
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -582,7 +583,7 @@ Transform:
   m_GameObject: {fileID: 8847665247663304397}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.24997711, y: 3.2181334, z: -10}
+  m_LocalPosition: {x: 0.24998617, y: 2.8405035, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -623,7 +624,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.0585284
+  orthographic size: 6.75
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
