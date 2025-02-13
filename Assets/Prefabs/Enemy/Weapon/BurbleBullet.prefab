@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 3678081192823059522}
   - component: {fileID: 1541472486377302059}
   - component: {fileID: 5008818392574885322}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: BurbleBullet
-  m_TagString: Untagged
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
