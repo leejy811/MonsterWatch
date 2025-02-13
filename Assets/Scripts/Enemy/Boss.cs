@@ -46,7 +46,7 @@ public class Boss : Enemy
 
     private void Update()
     {
-        //if (!isStart) return;
+        if (!isStart) return;
 
         curAttackTime += Time.deltaTime;
 
