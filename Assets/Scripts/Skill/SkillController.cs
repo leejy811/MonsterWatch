@@ -60,7 +60,6 @@ public class SkillController : MonoBehaviour
 
     void ShootSkill()
     {
-        Debug.Log("SHoott~~~");
         StartCoroutine(ShootCoroutine(shootNum));
     }
 
@@ -86,11 +85,25 @@ public class SkillController : MonoBehaviour
 
     void Poison()
     {
-        Debug.Log("Poison~~~");
+        StartCoroutine(PoisonCoroutine());
+    }
+
+    IEnumerator PoisonCoroutine()
+    {
+        PlayerController.instance.isPoison = true;
+        yield return new WaitForSeconds(poisonTime);
+        PlayerController.instance.isPoison = false;
     }
 
     void Invincibility()
     {
-        Debug.Log("Invincibility~~~");
+        StartCoroutine(InvincibilityCoroutine());
+    }
+
+    IEnumerator InvincibilityCoroutine()
+    {
+        PlayerController.instance.isInvincibility = true;
+        yield return new WaitForSeconds(invincibilityTime);
+        PlayerController.instance.isInvincibility = false;
     }
 }

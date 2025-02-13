@@ -41,6 +41,13 @@ public class PlayerController : MonoBehaviour
     public bool isDashable;
     public bool isDashReset;   
     public bool isInputEnabled;
+    public bool isPoison;
+    public bool isInvincibility;
+
+    [Header("Time Info")]
+    public float invincibilityTimeScale;
+    public float damagedTimeScale;
+    public float timeSlowDuration;
 
     #region Components
     public Rigidbody2D rb;
@@ -322,14 +329,19 @@ public class PlayerController : MonoBehaviour
 
     void OnDamaged(Vector3 targetPos)
     {
-        //curHP--;
+        if (!isInvincibility)
+        {
+
+            //curHP--;
+        }
+
         if (curHP <= 0)
             Dead();
         else
         {
             StartCoroutine(RecoilCoroutine(targetPos, damagedRecoilForce, damagedRecoilDuration));
+            StartCoroutine(TimeSlowCoroutine());
         }
-
     }
 
     void Dead()
@@ -347,6 +359,17 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(recoilDuration);
 
         isInputEnabled = true;
+    }
+
+    private IEnumerator TimeSlowCoroutine()
+    {
+        if (isInvincibility)
+            Time.timeScale = invincibilityTimeScale;
+        else
+            Time.timeScale = damagedTimeScale;
+        Debug.Log(Time.timeScale);
+        yield return new WaitForSeconds(timeSlowDuration);
+        Time.timeScale = 1.0f;
     }
 
     bool CheckGrounded()

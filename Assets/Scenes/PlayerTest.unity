@@ -585,6 +585,11 @@ MonoBehaviour:
   isDashable: 1
   isDashReset: 1
   isInputEnabled: 1
+  isPoison: 0
+  isInvincibility: 0
+  invincibilityTimeScale: 0.3
+  damagedTimeScale: 0.4
+  timeSlowDuration: 0.05
   rb: {fileID: 1223853983}
   damagedCol: {fileID: 1223853988}
   attackCol: {fileID: 302838499}
