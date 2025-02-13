@@ -252,6 +252,7 @@ public class PlayerController : MonoBehaviour
         isInputEnabled = false;
         isDashable = false;
         isDashReset = false;
+        SoundManager.instance.PlaySFX("Water");
 
         StartCoroutine(DashCoroutine(dashInterval, dashStartDelay, dashEndDelay));
     }
@@ -301,14 +302,14 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("IsAttack", true);
         attackEffect.SetActive(true);
-
+        SoundManager.instance.PlaySFX("PlayerAttack");
         StartCoroutine(AttackCoroutine(attackInterval));
     }
 
     private IEnumerator AttackCoroutine(float attackInterval)
     {
         Vector2 origin = this.transform.position;
-
+        isInputEnabled = false;
         ContactFilter2D filter = new ContactFilter2D();
         filter.SetLayerMask(LayerMask.GetMask("Enemy"));
         List<Collider2D> targets = new List<Collider2D>();
@@ -331,6 +332,7 @@ public class PlayerController : MonoBehaviour
         // attack cool down
         isAttackable = false;
         yield return new WaitForSeconds(attackInterval);
+        isInputEnabled = true;
         isAttackable = true;
         animator.SetBool("IsAttack", false);
         attackEffect.SetActive(false);
@@ -350,7 +352,7 @@ public class PlayerController : MonoBehaviour
                 curHP += tempHP;
                 tempHP = 0;
             }
-            //UIManager.instance.UpdateHealth(-1);
+            UIManager.instance.UpdateHealth();
 
             if (curHP > 0)
             {
@@ -371,7 +373,7 @@ public class PlayerController : MonoBehaviour
     {
         if (curHP < maxHP)
             curHP += val;
-        //UIManager.instance.UpdateHealth(1);
+        UIManager.instance.UpdateHealth();
     }
 
     private void Dead()

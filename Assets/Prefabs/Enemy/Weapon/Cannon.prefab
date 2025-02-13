@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933509ed8115a4f42af704c73512936e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootForce: 50
-  yOffest: 30
+  shootForce: 40
+  yOffest: 15
 --- !u!50 &-8986062177574847135
 Rigidbody2D:
   serializedVersion: 4

@@ -39,6 +39,7 @@ public class SoundManager : MonoBehaviour
         else
             Destroy(this.gameObject);
 
+        bgmPlayer.loop = true;
         PlayBGM("blackmagic");
     }
 
