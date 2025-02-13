@@ -21,9 +21,9 @@ public class UIManager : MonoBehaviour
     public HealthUI healthUI;
     public SkillUI skillUI;
 
-    public void UpdateHealth(int amount)
+    public void UpdateHealth()
     {
-        healthUI.UpdateLife(amount);
+        healthUI.UpdateLife();
     }
 
     public void ChangeSkill()
