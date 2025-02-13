@@ -19,7 +19,6 @@ public class EnemyIdleState : EnemyState
         ChangeDirection();
 
         enemy.target = null;
-        enemy.animator.SetBool("isMoving", false);
     }
 
     public override void Exit()
@@ -52,8 +51,8 @@ public class EnemyIdleState : EnemyState
         int prevDir = enemy.xDir;
         enemy.xDir = Random.Range(-1, 2);
 
-        if (prevDir != enemy.xDir)
-            transform.localScale = new Vector3(enemy.xDir * -1, transform.localScale.y, transform.localScale.z);
+        if (prevDir != enemy.xDir && enemy.xDir != 0)
+            enemy.transform.localScale = new Vector3(enemy.xDir * -1, enemy.transform.localScale.y, enemy.transform.localScale.z);
     }
 
     private void ResetTimer()

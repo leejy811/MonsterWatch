@@ -53,11 +53,14 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if (isDie) return;
         stateMachine.currentState.Update();
     }
 
     public void Move(float speed)
     {
+        Debug.Log(xDir != 0);
+        animator.SetBool("IsMoving", xDir != 0);
         transform.position += Vector3.right * xDir * speed * Time.deltaTime;
     }
 

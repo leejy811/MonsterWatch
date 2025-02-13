@@ -11,6 +11,8 @@ public class EnemyAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemy.xDir = 0;
+        stateTimer = enemy.attackCool / 2;
     }
 
     public override void Exit()
