@@ -26,6 +26,8 @@ public class Boss : Enemy
     public List<BossSkill> skills;
     public Vector2Int restRange;
 
+    public bool isStart;
+
     private float curAttackTime;
     private int curRestTime;
 
@@ -47,7 +49,15 @@ public class Boss : Enemy
 
     private void Update()
     {
-        
+        //if (!isStart) return;
+
+        curAttackTime += Time.deltaTime;
+
+        if(curAttackTime > attackCool)
+        {
+            Think();
+            curAttackTime = 0.0f;
+        }
     }
 
     private void InitProb()

@@ -10,15 +10,5 @@ public class MeleeEnemy : Enemy
     public override void Attack()
     {
         base.Attack();
-        StartCoroutine(PlayAttack());
-    }
-
-    protected override IEnumerator PlayAttack()
-    {
-        boxCollider.enabled = true;
-
-        yield return new WaitForSeconds(attackTime);
-
-        boxCollider.enabled = false;
     }
 }

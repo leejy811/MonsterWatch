@@ -18,6 +18,10 @@ public class Wave : MonoBehaviour
     {
         damage = _damage;
         dir = _dir;
+
+        transform.localScale = _dir + new Vector3(0, 1, 1);
+
+        gameObject.GetComponentInChildren<Animator>().SetTrigger("DoStart");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

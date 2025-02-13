@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public Transform target;
 
     private bool isDie;
+    private bool isPoison;
 
     #region Components
     protected Rigidbody2D rb;
@@ -119,10 +120,14 @@ public class Enemy : MonoBehaviour
     {
         for (int i = 0;i < hitTimes;i++)
         {
-            if (isDie) break;
+            if (isDie || isPoison) break;
+
+            isPoison = true;
             OnDamage(damage);
             yield return new WaitForSeconds(second);
         }
+
+        isPoison = false;
     }
 
     protected void OnDamage(int damage)
